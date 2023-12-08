@@ -6,8 +6,9 @@ phases:
       - echo Logging into ECR
       - test connection
       - aws --version
+      - REPOSITORY_URI=337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 337040204257.dkr.ecr.us-east-1.amazonaws.com 
-
+      
   build:
     commands:
       - echo Starting build at `date`
