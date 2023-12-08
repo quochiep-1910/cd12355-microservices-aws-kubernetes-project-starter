@@ -41,6 +41,7 @@ def get_daily_visits():
 
         response = {}
         for row in result:
+            app.logger.info(row)
             response[str(row[0])] = row[1]
 
         app.logger.info(response)
