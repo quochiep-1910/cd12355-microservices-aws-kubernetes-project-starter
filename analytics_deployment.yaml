@@ -16,7 +16,7 @@ spec:
         app: analytics
     spec:
       containers:
-      - image: 615115875849.dkr.ecr.us-east-1.amazonaws.com/project3:0.0.2
+      - image: 432003420039.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
         name: project3
         env:
           - name: DB_USERNAME
