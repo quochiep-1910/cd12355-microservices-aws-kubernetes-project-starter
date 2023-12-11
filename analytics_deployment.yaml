@@ -16,8 +16,8 @@ spec:
         app: analytics
     spec:
       containers:
-      - image: 432003420039.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
-        name: project3
+      - image: 530523547736.dkr.ecr.us-east-1.amazonaws.com/project3hiep
+        name: project3hiep
         env:
           - name: DB_USERNAME
             value: postgres
