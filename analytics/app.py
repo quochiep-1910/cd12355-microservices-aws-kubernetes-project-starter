@@ -10,7 +10,7 @@ from random import randint
 from config import app, db
 
 
-port_number = int(os.environ.get("APP_PORT", 5153))
+port_number = int(os.environ.get("APP_PORT", 5000))
 
 
 @app.route("/health_check")
@@ -41,7 +41,6 @@ def get_daily_visits():
 
         response = {}
         for row in result:
-            app.logger.info(row)
             response[str(row[0])] = row[1]
 
         app.logger.info(response)

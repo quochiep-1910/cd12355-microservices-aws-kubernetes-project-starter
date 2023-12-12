@@ -1,14 +1,19 @@
-FROM python:3.8
+FROM python:3.10-slim-buster
 
-WORKDIR /app
+USER root
 
-COPY . .
+WORKDIR /src
 
-ENV DB_USERNAME=postgres
-ENV DB_PASSWORD=4J7GhmBgVJ
-ENV DB_HOST=postgre-postgresql
+COPY ./requirements.txt requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install --upgrade flask
+# Dependencies required for psycopg2 (used for Postgres client)
+RUN apt update -y && apt install -y build-essential libpq-dev
 
-CMD ["DB_USERNAME=postgres", "DB_PASSWORD=4J7GhmBgVJ", "DB_HOST=postgre-postgresql", "python", "app.py"]
+# Dependencies are installed during build time in the container itself so we don't have OS mismatch
+RUN pip install -r requirements.txt
+
+COPY . .    
+
+EXPOSE 5000
+
+CMD python app.py
