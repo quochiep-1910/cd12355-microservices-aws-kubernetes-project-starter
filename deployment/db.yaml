@@ -59,7 +59,7 @@ spec:
       containers:
         - name: app-db
           # image: 118986339812.dkr.ecr.us-east-1.amazonaws.com/postgres:latest
-          image: 530523547736.dkr.ecr.us-east-1.amazonaws.com/project3hiep
+          image: 432003420039.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
           imagePullPolicy: "Always"
           ports:
             - containerPort: 5432

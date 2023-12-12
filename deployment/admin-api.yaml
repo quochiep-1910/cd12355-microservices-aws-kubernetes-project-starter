@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: admin-api
-        image: 058700463501.dkr.ecr.us-east-1.amazonaws.com/udacity-p03
+        image: 432003420039.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
         imagePullPolicy: Always
         # livenessProbe:
         #   httpGet:
