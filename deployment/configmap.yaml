@@ -1,9 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 data:
-  DB_USERNAME: "postgres"
   DB_NAME: "postgres"
-  DB_HOST: "project3-db-postgresql.default.svc.cluster.local"
+  DB_USERNAME: "postgres"
   DB_PORT: "5432"
 metadata:
   name: db-env

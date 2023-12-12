@@ -6,12 +6,11 @@ from datetime import datetime, timedelta
 from flask import jsonify, request
 from sqlalchemy import and_, text
 from random import randint
-from models import Token
 
 from config import app, db
 
 
-port_number = int(os.environ.get("APP_PORT", 5153))
+port_number = int(os.environ.get("APP_PORT", 5000))
 
 
 @app.route("/health_check")
@@ -48,9 +47,10 @@ def get_daily_visits():
 
     return response
 
+
 @app.route("/api/reports/daily_usage", methods=["GET"])
 def daily_visits():
-    return jsonify(get_daily_visits())
+    return jsonify(get_daily_visits)
 
 
 @app.route("/api/reports/user_visits", methods=["GET"])
