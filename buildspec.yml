@@ -1,26 +1,23 @@
 version: 0.2
 
+env:
+  shell: /bin/sh
+
 phases:
+  # install:
+  #   on-failure: ABORT
+  #   runtime-versions:
+  #     docker: 24
   pre_build:
+    on-failure: ABORT
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 432003420039.dkr.ecr.us-east-1.amazonaws.com
-  build:
-    commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...  
-      - echo ***************************** DOCKER BUILDX local *****************************
-      # - docker buildx build -t $IMAGE_REPO_NAME:$IMAGE_TAG . --platform linux/arm64
-      # - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      # - docker images
-      # - docker image inspect $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo Login ECR.
+      - IMAGE_TAG=1.0.0
+      - AWS_REPOSITORY="project3hiep"
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 530523547736.dkr.ecr.us-east-1.amazonaws.com
       - docker build -t project3hiep .
-      # - docker buildx build -t udacity-p03-ecr-repo . --platform linux/arm64
-     # - docker image inspect project3hiep:latest 432003420039.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest | grep "Architecture"
-      - docker tag project3hiep:latest 432003420039.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
-  post_build:
+      - docker tag project3hiep:latest 530523547736.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
+  build:
+    on-failure: ABORT
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - docker push 432003420039.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
+      - docker push 530523547736.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest

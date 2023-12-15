@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
-data:
-  DB_NAME: "postgres"
-  DB_USERNAME: "postgres"
-  DB_PORT: "5432"
 metadata:
-  name: db-env
+  name: database-config
+data:
+  DB_HOST:  postgresql-1702637657
+  DB_PORT: '5432'
+  DB_NAME: postgres
