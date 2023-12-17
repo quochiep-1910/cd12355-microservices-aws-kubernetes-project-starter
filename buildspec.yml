@@ -2,7 +2,6 @@ version: 0.2
 
 env:
   shell: /bin/sh
-
 phases:
   pre_build:
     on-failure: ABORT
@@ -10,8 +9,9 @@ phases:
       - echo Login ECR.
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 337040204257.dkr.ecr.us-east-1.amazonaws.com
       - docker build -t project3hiep .
+      - docker tag project3hiep:latest 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
+
   build:
     on-failure: ABORT
     commands:
-      - docker tag project3hiep:latest 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
       - docker push 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
