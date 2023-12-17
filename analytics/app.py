@@ -34,7 +34,7 @@ def get_daily_visits():
         result = db.session.execute(text("""
         SELECT Date(created_at) AS date,
             Count(*)         AS visits
-        FROM  tokens
+        FROM   tokens
         WHERE  used_at IS NOT NULL
         GROUP  BY Date(created_at)
         """))
