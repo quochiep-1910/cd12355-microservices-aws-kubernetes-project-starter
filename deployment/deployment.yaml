@@ -5,11 +5,11 @@ metadata:
   labels:
     app: p3-app-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: p3-app
-  template:
+  template:z
     metadata:
       labels:
         app: p3-app
