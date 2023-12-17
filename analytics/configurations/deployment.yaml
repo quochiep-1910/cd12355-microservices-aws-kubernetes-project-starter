@@ -20,7 +20,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-          image: <CONTAINER_IMAGE_NAME>
+          image: 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:0b9c8c8
           livenessProbe:
             httpGet:
               path: /health_check

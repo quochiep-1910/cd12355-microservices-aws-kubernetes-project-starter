@@ -24,5 +24,5 @@ phases:
       - echo $IMAGE_URI
       - docker push $IMAGE_URI
       - cd configurations
-      - sed -i -e "s|<CONTAINER_IMAGE_NAME>|`echo ${IMAGE_URI}`|g" deployment.yaml
+      - sed -i -e "s|337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:0b9c8c8|`echo ${IMAGE_URI}`|g" deployment.yaml
       - cat deployment.yaml
