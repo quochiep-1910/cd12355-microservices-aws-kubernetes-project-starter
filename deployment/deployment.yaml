@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app-container
-          image: 120044776512.dkr.ecr.us-east-1.amazonaws.com/udacity_repo_120044776512:1.0.0
+          image: 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:692c304
           ports:
             - containerPort: 80
           env:

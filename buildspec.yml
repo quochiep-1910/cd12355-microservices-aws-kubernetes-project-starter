@@ -4,15 +4,10 @@ env:
   shell: /bin/sh
 
 phases:
-  # install:
-  #   on-failure: ABORT
-  #   runtime-versions:
-  #     docker: 24
   pre_build:
     on-failure: ABORT
     commands:
       - echo Login ECR.
-      - IMAGE_TAG=1.0.0
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 337040204257.dkr.ecr.us-east-1.amazonaws.com
       - docker build -t project3hiep .
   build:
