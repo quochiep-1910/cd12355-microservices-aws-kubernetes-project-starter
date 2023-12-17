@@ -1,13 +1,8 @@
-FROM public.ecr.aws/docker/library/python:3.10-alpine 
+FROM python:3
 
-USER root
+WORKDIR /usr/src/app
 
-WORKDIR /src
+COPY . ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /src
-
-# Dependencies are installed during build time in the container itself so we don't have OS mismatch
-RUN pip install -r requirements.txt
-
-# Start  Flask application
-CMD python app.py
+CMD [ "python", "./app.py" ]

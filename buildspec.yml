@@ -1,28 +1,26 @@
 version: 0.2
+
 env:
-  variables:
-    IMAGE_REPO_NAME: project3hiep
-    
+  shell: /bin/sh
+
 phases:
+  # install:
+  #   on-failure: ABORT
+  #   runtime-versions:
+  #     docker: 24
   pre_build:
+    on-failure: ABORT
     commands:
-      - echo Logging into ECR
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 337040204257.dkr.ecr.us-east-1.amazonaws.com
-      - IMAGE_TAG=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | head -c 7)
+      - echo Login ECR.
+      - IMAGE_TAG=1.0.0
+      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+      - AWS_REPOSITORY="udacity_repo_${AWS_ACCOUNT_ID}"
+      - AWS_ECR="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+      - >
+        aws ecr get-login-password --region $AWS_DEFAULT_REGION |
+        docker login --username AWS --password-stdin $AWS_ECR
   build:
+    on-failure: ABORT
     commands:
-      - cd analytics
-      - echo Starting build at `date`
-      - echo Building the Docker image...          
-      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG 337040204257.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
-  post_build:
-    commands:
-      - echo Completed build at `date`
-      - echo Pushing the Docker image...
-      - IMAGE_URI=337040204257.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - echo $IMAGE_URI
-      - docker push $IMAGE_URI
-      - cd configurations
-      - sed -i -e "s|337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:0b9c8c8|`echo ${IMAGE_URI}`|g" deployment.yaml
-      - cat deployment.yaml
+      - docker build --tag "${AWS_ECR}/${AWS_REPOSITORY}:${IMAGE_TAG}" ./analytics
+      - docker push "${AWS_ECR}/${AWS_REPOSITORY}:${IMAGE_TAG}"
