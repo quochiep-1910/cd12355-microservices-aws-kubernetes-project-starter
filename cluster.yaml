@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: my-eks-cluster-hungnd
+  name: my-eks-cluster-hiepnq
   region: us-east-1
 
 nodeGroups:

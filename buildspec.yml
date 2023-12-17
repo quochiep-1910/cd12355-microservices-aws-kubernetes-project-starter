@@ -13,14 +13,10 @@ phases:
     commands:
       - echo Login ECR.
       - IMAGE_TAG=1.0.0
-      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
-      - AWS_REPOSITORY="udacity_repo_${AWS_ACCOUNT_ID}"
-      - AWS_ECR="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-      - >
-        aws ecr get-login-password --region $AWS_DEFAULT_REGION |
-        docker login --username AWS --password-stdin $AWS_ECR
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 337040204257.dkr.ecr.us-east-1.amazonaws.com
+      - docker build -t project3hiep .
+      - docker tag project3hiep:latest 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
   build:
     on-failure: ABORT
     commands:
-      - docker build --tag "${AWS_ECR}/${AWS_REPOSITORY}:${IMAGE_TAG}" ./analytics
-      - docker push "${AWS_ECR}/${AWS_REPOSITORY}:${IMAGE_TAG}"
+      - docker push 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
