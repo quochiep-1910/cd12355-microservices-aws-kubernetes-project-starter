@@ -18,7 +18,7 @@
 
     `kubectl apply -f ./deployment/deployment.yaml`
 
-    `kubectl apply -f ./deployment/service.yaml`
+    `kubectl apply -f ./deployment/services.yaml`
 - Step 4: Verify whether our application working or not by running port-forward command and test.
 
     `kubectl port-forward --namespace default svc/my-service  80:80`

@@ -9,14 +9,14 @@ spec:
   selector:
     matchLabels:
       app: p3-app
-  template:z
+  template:
     metadata:
       labels:
         app: p3-app
     spec:
       containers:
-        - name: app-container
-          image: 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:692c304
+        - name: project3hiep
+          image: 337040204257.dkr.ecr.us-east-1.amazonaws.com/project3hiep:latest
           ports:
             - containerPort: 80
           env:
